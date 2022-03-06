@@ -10,7 +10,8 @@ pipeline{
             steps{
                 sh 'mvn clean package'
             }
-        }stage('Deploy to the tomcat'){
+        }
+        stage('Deploy to the tomcat'){
             steps{
                 script{
                      deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://13.233.247.23:8080')], contextPath: 'testapp', war: '**/*.war'
