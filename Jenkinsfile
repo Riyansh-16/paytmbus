@@ -18,5 +18,16 @@ pipeline{
                 }
             }
         }
+        stage('building docker image'){
+            steps{
+                script{
+                        sh 'docker build -t riyansh16/paytmbus:$BUILD_NUMBER .'
+                        withCredentials([string(credentialsId: 'docker', variable: 'docker-password')]) {
+                               sh 'cat /home/ubuntu/my_password.txt | docker login --username riyansh16 --password-stdin'
+                               sh 'docker push riyansh16/paytmbus:$BUILD_NUMBER'
+                         }
+                 }
+            }
+        }
     }
 }
