@@ -12,7 +12,9 @@ pipeline{
             }
         }stage('Deploy to the tomcat'){
             steps{
-               deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://13.233.247.23:8080')], contextPath: 'testapp', war: '**/*.war'
+                script{
+                     deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://13.233.247.23:8080')], contextPath: 'testapp', war: '**/*.war'
+                }
             }
         }
     }
